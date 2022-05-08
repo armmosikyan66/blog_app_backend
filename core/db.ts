@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { connect, connection } from "mongoose";
 
-mongoose.connect('mongodb+srv://Arman:Armmosikyan2005@cluster0.hugd0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+connect('mongodb+srv://Arman:Armmosikyan2005@cluster0.hugd0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -9,8 +9,6 @@ mongoose.connect('mongodb+srv://Arman:Armmosikyan2005@cluster0.hugd0.mongodb.net
     console.log("database has benn connected")
 });
 
-const db = mongoose.connection;
+connection.on('error', console.error.bind(console, 'connection error'));
 
-db.on('error', console.error.bind(console, 'connection error'));
-
-module.exports = {db, mongoose}
+export default connection

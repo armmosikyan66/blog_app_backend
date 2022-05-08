@@ -9,25 +9,26 @@ interface SendEmailProps {
     html: string;
 }
 
-const sendMail = async ({emailFrom, emailTo, subject, html}: SendEmailProps) => {
-    return mailTransporter.sendMail(
-        {
-            from: emailFrom,
-            to: emailTo,
-            subject: subject,
-            html: html,
-        },
-        function (err: Error | null, info: SentMessageInfo) {
-            if (err) {
-                console.log(err);
-                return err;
-            } else {
-                console.log(info);
-                return info;
-            }
-        },
-    );
-};
-module.exports = {
-    sendMail
+class EmailService {
+    async sendMail({emailFrom, emailTo, subject, html}: SendEmailProps) {
+        return mailTransporter.sendMail(
+            {
+                from: emailFrom,
+                to: emailTo,
+                subject: subject,
+                html: html,
+            },
+            function (err: Error | null, info: SentMessageInfo) {
+                if (err) {
+                    console.log(err);
+                    return err;
+                } else {
+                    console.log(info);
+                    return info;
+                }
+            },
+        );
+    };
 }
+
+export default new EmailService();

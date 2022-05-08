@@ -1,7 +1,7 @@
 import UserModel from '../models/UserModel';
 import UserRepositories from "../repositories/UserRepositories";
 import {IUserDataProps} from "../interfaces/UserDataProps";
-const { sendMail } = require('../services/emailService');
+const EmailService  = require('../services/emailService');
 const generateMD5 = require('../utils/generateHash');
 
 class UserServices {
@@ -26,7 +26,7 @@ class UserServices {
 
         const [user] = await Promise.all([
             UserRepositories.create(userData),
-            sendMail({
+            EmailService.sendMail({
                 emailFrom: 'armanmosikyan@gmail.com',
                 emailTo: email,
                 subject: 'Подтверждение почты Twitter Clone Tutorial',
